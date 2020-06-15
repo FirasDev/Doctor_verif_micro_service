@@ -6,15 +6,15 @@ const fs = require('fs');
 const { once } = require('events');
 
 //initialization
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(fileUpload());
 
 
 
-
 app.post('/verif_doc', (req,res)=>{
-    const file = req.files.sampleFile;
+    const file = req.files.file;
     const fileName = file.name;
     const filePath = './diploma/downloads/' + fileName;
 
@@ -30,7 +30,7 @@ app.post('/verif_doc', (req,res)=>{
         }
         else{
             console.log("===="+verif_result+"=====");
-            res.status(404).send("Not verified");
+            res.status(200).send("Not verified");
         }
     }catch(err){
         console.log('Error : failed to download file');
@@ -96,6 +96,6 @@ function sleep(time, callback) {
     callback();
 }
 
-app.listen(3000, ()=>{
+app.listen(3066, ()=>{
     console.log('Server is listening on port 3000');
 });

@@ -15,9 +15,12 @@ inputPdf = ""  # static value to be replaced
 for txt in serverResponse:
     inputPdf += txt
 
-# inputPdf = "en.jpg"
+# inputPdf = "English.jpg"
 
-inputLanguage = "English"  # static value to be replaced
+inputLanguage = inputPdf[:-4]
+
+print(inputLanguage)
+
 # print(os.listdir())
 location = "diploma/downloads"
 outputTiff = str(datetime.datetime.now().timestamp())
@@ -43,38 +46,38 @@ def action4():
 
 
 strings = {'l’enseignement': action1, 'devant le jury': action2, 'université': action3, 'DOCTEUR': action4}
-convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText
+convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText
 
 if inputLanguage == "French":
     strings = {'l’enseignement': action1, 'devant le jury': action2, 'université': action3, 'DOCTEUR': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l fra"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l fra"
 elif inputLanguage == "English":
     strings = {'BY CONDUCTING ORIGINAL RESEARCH': action1, 'HAS DEMONSTRATED THOROUGH KNOWLEDGE OF': action2,
                'DOCTOR OF PHILOSOPHY': action3, 'RESEARCH': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l eng"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l eng"
 elif inputLanguage == "German":
     strings = {'Medizinische Fakultät': action1, 'Doktorin': action2, 'Bundesgesetz': action3,
                'Gegen diesen Bescheid': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l deu"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l deu"
 elif inputLanguage == "Arabic":
     strings = {'إجارة': action1, 'البشري': action2, 'البشري': action3, 'إجارة': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l ara"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l ara"
 elif inputLanguage == "Russian":
     strings = {'лИПЛОоМ': action1, 'ДОКТОРА НАУК': action2, 'ПРИСУЖДЕНА УЧЕНАЯ СТЕПЕНЬ': action3,
                'Совете МинистРов': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l rus"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l rus"
 elif inputLanguage == "Italian":
     strings = {'MINISTRO': action1, 'DIPLOMA': action2, 'RICERCA': action3, 'IN NOME DELLA LEGGE': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l ita"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l ita"
 elif inputLanguage == "Chinese":
     strings = {'MINISTRO': action1, 'DIPLOMA': action2, 'RICERCA': action3, 'IN NOME DELLA LEGGE': action4}
-    convertCommand = "tesseract " + location + "/" + inputPdf + " outputs/" + outputText + " -l chi_sim"
+    convertCommand = "tesseract " + location + "/" + inputPdf + " diploma/outputs/" + outputText + " -l chi_sim"
 
 os.system(convertCommand)
 # print(convertCommand)
 
 
-with open("diploma/outputs/" + "a" + ".txt", 'r', encoding='utf-8') as file:
+with open("diploma/outputs/" + outputText + ".txt", 'r', encoding='utf-8') as file:
     for line in file:
         for search, action in strings.items():
             if search in line:
